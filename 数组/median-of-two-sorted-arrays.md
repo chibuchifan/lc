@@ -29,3 +29,72 @@ The median is (2 + 3)/2 = 2.5
 
 ```python
 
+# -*- coding: utf-8 -*-
+
+def get_index(la, a):
+    if la < a:
+        return la + 1
+    else:
+        return la
+
+def get_value(a, A, b, B):
+    if a > len(a) -1:
+        return None
+    else:
+        return  A[a]
+def median(A, B):
+    a = len(A)
+    b = len(B)
+    if a > b:
+        a, b, A, B = b, a, B, A
+    if (a + b ) % 2 == 1:
+        mida = (a + b ) // 2
+        midb = (a + b ) // 2 + 1
+    else:
+        mida = midb = (a + b) // 2
+    ba=bb=0
+    ma= A[0]
+    mb= B[0]
+    print(mida)
+    while ba + bb <= mida:
+        # na = ba + 1
+        # nb = bb + 1
+        if ba == a:
+            bb += 1
+            ma = B[bb]
+            mb = B[bb-1]
+            continue
+        if bb == b:
+            ba += 1
+            ma = A[ba-1]
+            mb = A[ba ]
+            continue
+        if A[ba] < B[bb]:
+            ma = A[ba]
+            ba = get_index(ba, a)
+
+        elif A[ba] > B[bb]:
+            mb = B[bb]
+            bb = get_index(bb, b)
+
+        else:
+
+            ba = get_index(ba, a)
+            bb = get_index(bb, b)
+            ma = A[ba]
+            mb = B[bb]
+        print(ba, bb, ma, mb)
+    print(ma, mb, mida)
+    print("两个数组总长度是%d" % (a+b))
+    if (a+b) % 2 == 0:
+        return (ma+mb) / 2
+    else:
+        return mb
+
+if __name__ == '__main__':
+    # a = [1, 3, 4, 5]
+    # b = [0]
+    a = [1, 3, 4, 5, 7, 9]
+    b = [2, 3, 4, 6, 8]
+    print(median(a, b))
+```
